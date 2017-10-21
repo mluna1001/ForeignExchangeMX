@@ -1,14 +1,15 @@
-﻿using Xamarin.Forms;
-
-namespace ForeignExchangeMX
+﻿namespace ForeignExchangeMX
 {
+    using Xamarin.Forms;
+    using Views;
+
     public partial class App : Application
     {
         public App()
         {
             InitializeComponent();
 
-            MainPage = new ForeignExchangeMXPage();
+            MainPage = new MainView();
         }
 
         protected override void OnStart()

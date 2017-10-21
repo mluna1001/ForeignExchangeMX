@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+        xmlns="http://xamarin.com/schemas/2014/forms" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+        x:Class="ForeignExchangeMX.Views.MainView"
+        BackgroundColor="Yellow"
+        BindingContext="{Binding Main, Source={StaticResource Locator}}">
+	<ContentPage.Content>
+        <StackLayout
+            Padding="20,30,20,10">
+            <Label 
+                FontAttributes="Bold"
+                FontSize="Large"
+                HorizontalOptions="Center"
+                Text="Foreign Exchange">
+            </Label>
+            <Label 
+                Text="Amount:">
+            </Label>
+            <Entry
+                Text="{Binding Amount, Mode=TwoWay}"
+                Placeholder="Enter the amount to convert...">
+            </Entry>
+            <Label
+                Text="Source rate:">
+            </Label>
+            <Picker
+                ItemDisplayBinding="{Binding Name}"
+                ItemsSource="{Binding Rates}"
+                SelectedItem="{Binding SourceRate}"
+                Title="Select a source rate...">
+            </Picker>
+            <Label
+                Text="Target rate:">
+            </Label>
+            <Picker
+                ItemDisplayBinding="{Binding Name}"
+                ItemsSource="{Binding Rates}"
+                SelectedItem="{Binding TargetRate}"
+                Title="Select a target rate...">
+            </Picker>
+            <ActivityIndicator
+                IsRunning="{Binding IsRunning, Mode=TwoWay}">
+            </ActivityIndicator>
+            <Button
+                BorderRadius="25"
+                Command="{Binding ConvertCommand}"
+                FontAttributes="Bold"
+                HeightRequest="50"
+                IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                TextColor="White"
+                BackgroundColor="Navy"
+                Text="Convert">
+            </Button>
+            <Label
+                BackgroundColor="Silver"
+                FontSize="Large"
+                HorizontalTextAlignment="Center"
+                Margin="0,10"
+                Text="{Binding Result, Mode=TwoWay}"
+                VerticalOptions="FillAndExpand"
+                VerticalTextAlignment="Center">
+            </Label>
+        </StackLayout>
+	</ContentPage.Content>
+</ContentPage>
