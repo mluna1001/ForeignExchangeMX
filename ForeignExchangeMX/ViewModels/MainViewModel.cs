@@ -18,6 +18,8 @@
         #endregion
 
         #region Attributes
+        Rate _sourceRate;
+        Rate _targetRate;
         bool _isEnabled;
         bool _isRunning;
         string _result;
@@ -51,14 +53,38 @@
 
         public Rate SourceRate
         {
-            get;
-            set;
+            get
+            {
+                return _sourceRate;
+            }
+            set
+            {
+                if (_sourceRate != value)
+                {
+                    _sourceRate = value;
+                    PropertyChanged?.Invoke(
+                        this,
+                        new PropertyChangedEventArgs(nameof(SourceRate)));
+                }
+            }
         }
 
         public Rate TargetRate
         {
-            get;
-            set;
+            get
+            {
+                return _targetRate;
+            }
+            set
+            {
+                if (_targetRate != value)
+                {
+                    _targetRate = value;
+                    PropertyChanged?.Invoke(
+                        this,
+                        new PropertyChangedEventArgs(nameof(TargetRate)));
+                }
+            }
         }
 
         public bool IsRunning
@@ -134,7 +160,7 @@
             try
             {
                 var client = new HttpClient();
-                client.BaseAddress = new 
+                client.BaseAddress = new
                     Uri("http://apiexchangerates.azurewebsites.net");
                 var controller = "/api/Rates";
                 var response = await client.GetAsync(controller);
@@ -162,6 +188,22 @@
         #endregion
 
         #region Commands
+        public ICommand SwitchCommand
+        {
+            get
+            {
+                return new RelayCommand(Switch);
+            }    
+        }
+
+        void Switch()
+        {
+            var aux = SourceRate;
+            SourceRate = TargetRate;
+            TargetRate = aux;
+            Convert();
+        }
+
         public ICommand ConvertCommand
         {
             get
@@ -211,7 +253,8 @@
                 return;
             }
 
-            var amountConverted = amount / (decimal)SourceRate.TaxRate * (decimal)TargetRate.TaxRate;
+            var amountConverted = amount / 
+                    (decimal)SourceRate.TaxRate * (decimal)TargetRate.TaxRate;
 
             Result = string.Format("{0} {1:C2} = {2} {3:C2}",
                                    SourceRate.Code,
