@@ -6,6 +6,7 @@
     using System.ComponentModel;
     using System.Net.Http;
     using System.Windows.Input;
+    using ForeignExchangeMX.Helpers;
     using ForeignExchangeMX.Models;
     using GalaSoft.MvvmLight.Command;
     using Newtonsoft.Json;
@@ -219,9 +220,9 @@
             if (string.IsNullOrEmpty(Amount))
             {
                 await Application.Current.MainPage.DisplayAlert(
-                    "Error",
-                    "You must enter a value in amount",
-                    "Accept"
+                    Lenguages.Error,
+                    Lenguages.AmmountValidation,
+                    Lenguages.Accept
                 );
                 return;
             }
