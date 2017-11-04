@@ -70,6 +70,7 @@
     <Compile Include="Interfaces\ILocalize.cs" />
     <Compile Include="Helpers\PlatformCulture.cs" />
     <Compile Include="Helpers\Lenguages.cs" />
+    <Compile Include="Helpers\TranslateExtension.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="GalaSoft.MvvmLight">

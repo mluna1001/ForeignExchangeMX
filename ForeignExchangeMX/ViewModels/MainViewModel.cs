@@ -156,7 +156,7 @@
         async void LoadRates()
         {
             IsRunning = true;
-            Result = "Loading rates...";
+            Result = Lenguages.Loading;
 
             try
             {
@@ -177,7 +177,7 @@
                 Rates = new ObservableCollection<Rate>(rates);
 
                 IsRunning = false;
-                Result = "Ready to convert!";
+                Result = Lenguages.Ready;
                 IsEnabled = true;
             }
             catch (Exception ex)
@@ -229,27 +229,27 @@
             if (!decimal.TryParse(Amount, out amount))
             {
                 await Application.Current.MainPage.DisplayAlert(
-                    "Error",
-                    "You must enter a numercic value in amount",
-                    "Accept"
+                    Lenguages.Error,
+                    Lenguages.AmountNumericValidation,
+                    Lenguages.Accept
                 );
                 return;
             }
             if (SourceRate == null)
             {
                 await Application.Current.MainPage.DisplayAlert(
-                    "Error",
-                    "You must select a source rate",
-                    "Accept"
+                    Lenguages.Error,
+                    Lenguages.SourceRateValidation,
+                    Lenguages.Accept
                 );
                 return;
             }
             if (TargetRate == null)
             {
                 await Application.Current.MainPage.DisplayAlert(
-                    "Error",
-                    "You must select a source rate",
-                    "Accept"
+                    Lenguages.Error,
+                    Lenguages.TargetRateValidation,
+                    Lenguages.Accept
                 );
                 return;
             }
