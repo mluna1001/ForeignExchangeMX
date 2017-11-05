@@ -1,15 +1,12 @@
 ﻿namespace ForeignExchangeMX.ViewModels
 {
-    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using System.Net.Http;
     using System.Windows.Input;
     using ForeignExchangeMX.Helpers;
     using ForeignExchangeMX.Models;
     using GalaSoft.MvvmLight.Command;
-    using Newtonsoft.Json;
     using Xamarin.Forms;
 
     public class MainViewModel : INotifyPropertyChanged
@@ -18,12 +15,17 @@
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
+        #region Services
+        ApiService apiSevice;
+        #endregion
+
         #region Attributes
         Rate _sourceRate;
         Rate _targetRate;
         bool _isEnabled;
         bool _isRunning;
         string _result;
+        string _status;
         ObservableCollection<Rate> _rates;
         #endregion
 
@@ -142,12 +144,30 @@
             }
         }
 
-        #endregion
+        public string Status
+        {
+            get
+            {
+                return _status;
+            }
+            set
+            {
+                if (_status != value)
+                {
+                    _status = value;
+                    PropertyChanged?.Invoke(
+                        this,
+                        new PropertyChangedEventArgs(nameof(Status)));
+                }
+            }
+        }
 
+        #endregion
 
         #region Constructors
         public MainViewModel()
         {
+            apiSevice = new ApiService();
             LoadRates();
         }
         #endregion
@@ -158,33 +178,32 @@
             IsRunning = true;
             Result = Lenguages.Loading;
 
-            try
-            {
-                var client = new HttpClient();
-                client.BaseAddress = new
-                    Uri("http://apiexchangerates.azurewebsites.net");
-                var controller = "/api/Rates";
-                var response = await client.GetAsync(controller);
-                var result = await response.Content.ReadAsStringAsync();
+            var connection = await apiSevice.CheckConnection();
 
-                if (!response.IsSuccessStatusCode)
-                {
-                    IsRunning = false;
-                    Result = result;
-                }
-
-                var rates = JsonConvert.DeserializeObject<List<Rate>>(result);
-                Rates = new ObservableCollection<Rate>(rates);
-
-                IsRunning = false;
-                Result = Lenguages.Ready;
-                IsEnabled = true;
-            }
-            catch (Exception ex)
+            if (!connection.IsSucess)
             {
                 IsRunning = false;
-                Result = ex.Message;
+                Result = connection.Message;
+                return;
             }
+
+            var response = await apiSevice.GetList<Rate>(
+                "http://apiexchangerates.azurewebsites.net",
+                "api/rates");
+
+            if (!response.IsSucess)
+            {
+                IsRunning = false;
+                Result = response.Message;
+                return;
+            }
+
+            Rates = new ObservableCollection<Rate>((List<Rate>)response.Result);
+            IsRunning = false;
+            IsEnabled = true;
+            Result = Lenguages.Ready;
+            Status = Lenguages.Status;
+
         }
         #endregion
 

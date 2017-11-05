@@ -92,5 +92,20 @@
         {
             get { return Resource.Ready; }
         }
+
+        public static string SettingInternetError
+        {
+            get { return Resource.SettingInternetError; }
+        }
+
+        public static string ConnectionInternetError
+        {
+            get { return Resource.ConnectionInternetError; }
+        }
+
+        public static string Status
+        {
+            get { return Resource.Status; }
+        }
     } 
 }

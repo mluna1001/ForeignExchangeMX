@@ -60,4 +60,13 @@
     <data name="Ready" xml:space="preserve">
         <value>¡ Listo para convertir !</value>
     </data>
+	<data name="SettingInternetError" xml:space="preserve">
+        <value>Verifica tu configuración de Internet</value>
+    </data>
+    <data name="ConnectionInternetError" xml:space="preserve">
+        <value>Verifica tu conexión a Internet</value>
+    </data>
+	<data name="Status" xml:space="preserve">
+        <value>Tasas cargadas desde Internet</value>
+    </data>
 </root>

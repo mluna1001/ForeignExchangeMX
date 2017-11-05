@@ -142,5 +142,23 @@ namespace ForeignExchangeMX.Resources {
                 return ResourceManager.GetString("Ready", resourceCulture);
             }
         }
+        
+        public static string SettingInternetError {
+            get {
+                return ResourceManager.GetString("SettingInternetError", resourceCulture);
+            }
+        }
+        
+        public static string ConnectionInternetError {
+            get {
+                return ResourceManager.GetString("ConnectionInternetError", resourceCulture);
+            }
+        }
+        
+        public static string Status {
+            get {
+                return ResourceManager.GetString("Status", resourceCulture);
+            }
+        }
     }
 }
