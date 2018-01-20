@@ -69,4 +69,7 @@
 	<data name="Status" xml:space="preserve">
         <value>Tasas cargadas desde Internet</value>
     </data>
+    <data name="ErrorLoad" xml:space="preserve">
+        <value>No hay conexiòn a internet y no se cargaron divisas. Intenta de nuevo con conexión a internet</value>
+    </data>
 </root>

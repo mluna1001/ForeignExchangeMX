@@ -1,4 +1,4 @@
-﻿namespace ForeignExchangeMX
+﻿namespace ForeignExchangeMX.Services
 {
     using System;
     using System.Collections.Generic;
@@ -11,7 +11,8 @@
 
     public class ApiService
     {
-        public async Task<Response> CheckConnection(){
+        public async Task<Response> CheckConnection()
+        {
             if (!CrossConnectivity.Current.IsConnected)
             {
                 return new Response

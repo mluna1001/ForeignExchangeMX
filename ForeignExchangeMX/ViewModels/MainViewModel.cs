@@ -3,9 +3,11 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
+    using System.Threading.Tasks;
     using System.Windows.Input;
     using ForeignExchangeMX.Helpers;
     using ForeignExchangeMX.Models;
+    using ForeignExchangeMX.Services;
     using GalaSoft.MvvmLight.Command;
     using Xamarin.Forms;
 
@@ -17,6 +19,8 @@
 
         #region Services
         ApiService apiSevice;
+        DialogService dialogService;
+        DataService dataService;
         #endregion
 
         #region Attributes
@@ -27,6 +31,7 @@
         string _result;
         string _status;
         ObservableCollection<Rate> _rates;
+        List<Rate> rates;
         #endregion
 
         #region Properties
@@ -168,6 +173,8 @@
         public MainViewModel()
         {
             apiSevice = new ApiService();
+            dataService = new DataService();
+            dialogService = new DialogService();
             LoadRates();
         }
         #endregion
@@ -182,28 +189,59 @@
 
             if (!connection.IsSucess)
             {
-                IsRunning = false;
-                Result = connection.Message;
-                return;
+                //IsRunning = false;
+                //Result = connection.Message;
+                //return;
+                LoadLocalData();
+            }
+            else
+            {
+                await LoadDataFromAPI();
             }
 
+            if (rates.Count == 0)
+            {
+                IsRunning = false;
+                IsEnabled = false;
+                Result = Lenguages.ErrorLoad;
+            }
+
+            Rates = new ObservableCollection<Rate>(rates);
+            IsRunning = false;
+            IsEnabled = true;
+            Result = Lenguages.Ready;
+            //Status = Lenguages.Status;
+
+        }
+
+        void LoadLocalData()
+        {
+            rates = dataService.Get<Rate>(false);
+            Status = "Rates loaded from local data";
+        }
+
+        async Task LoadDataFromAPI()
+        {
+            //var url = Application.Current.Resources["URLAPI"].ToString();
+            var url = "http://apiexchangerates.azurewebsites.net";
+
             var response = await apiSevice.GetList<Rate>(
-                "http://apiexchangerates.azurewebsites.net",
+                url,
                 "api/rates");
 
             if (!response.IsSucess)
             {
-                IsRunning = false;
-                Result = response.Message;
+                //IsRunning = false;
+                //Result = response.Message;
+                LoadLocalData();
                 return;
             }
 
-            Rates = new ObservableCollection<Rate>((List<Rate>)response.Result);
-            IsRunning = false;
-            IsEnabled = true;
-            Result = Lenguages.Ready;
-            Status = Lenguages.Status;
-
+            //Storage data local
+            rates = (List<Rate>)response.Result;
+            dataService.DeleteAll<Rate>();
+            dataService.Save(rates);
+            Status = "Rates loaded from internet";
         }
         #endregion
 
@@ -213,7 +251,7 @@
             get
             {
                 return new RelayCommand(Switch);
-            }    
+            }
         }
 
         void Switch()
@@ -238,42 +276,44 @@
 
             if (string.IsNullOrEmpty(Amount))
             {
-                await Application.Current.MainPage.DisplayAlert(
+                await dialogService.ShowMessage(
+                    Lenguages.Error,
+                    Lenguages.AmmountValidation
+                );
+
+                /*await Application.Current.MainPage.DisplayAlert(
                     Lenguages.Error,
                     Lenguages.AmmountValidation,
                     Lenguages.Accept
-                );
+                );*/
                 return;
             }
             if (!decimal.TryParse(Amount, out amount))
             {
-                await Application.Current.MainPage.DisplayAlert(
+                await dialogService.ShowMessage(
                     Lenguages.Error,
-                    Lenguages.AmountNumericValidation,
-                    Lenguages.Accept
+                    Lenguages.AmountNumericValidation
                 );
                 return;
             }
             if (SourceRate == null)
             {
-                await Application.Current.MainPage.DisplayAlert(
+                await dialogService.ShowMessage(
                     Lenguages.Error,
-                    Lenguages.SourceRateValidation,
-                    Lenguages.Accept
+                    Lenguages.SourceRateValidation
                 );
                 return;
             }
             if (TargetRate == null)
             {
-                await Application.Current.MainPage.DisplayAlert(
+                await dialogService.ShowMessage(
                     Lenguages.Error,
-                    Lenguages.TargetRateValidation,
-                    Lenguages.Accept
+                    Lenguages.TargetRateValidation
                 );
                 return;
             }
 
-            var amountConverted = amount / 
+            var amountConverted = amount /
                     (decimal)SourceRate.TaxRate * (decimal)TargetRate.TaxRate;
 
             Result = string.Format("{0} {1:C2} = {2} {3:C2}",

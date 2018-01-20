@@ -69,4 +69,7 @@
 	<data name="Status" xml:space="preserve">
         <value>Tarifs chargés depuis Internet</value>
     </data>
+    <data name="ErrorLoad" xml:space="preserve">
+        <value>Il n'y a pas de connexion internet et ne charge pas les tarifs précédents. Veuillez réessayer avec la connexion Internet</value>
+    </data>
 </root>

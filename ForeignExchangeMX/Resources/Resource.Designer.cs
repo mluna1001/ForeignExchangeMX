@@ -160,5 +160,11 @@ namespace ForeignExchangeMX.Resources {
                 return ResourceManager.GetString("Status", resourceCulture);
             }
         }
+        
+        public static string ErrorLoad {
+            get {
+                return ResourceManager.GetString("ErrorLoad", resourceCulture);
+            }
+        }
     }
 }

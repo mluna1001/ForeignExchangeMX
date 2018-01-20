@@ -107,5 +107,10 @@
         {
             get { return Resource.Status; }
         }
+
+        public static string ErrorLoad
+        {
+            get { return Resource.ErrorLoad; }
+        }
     } 
 }

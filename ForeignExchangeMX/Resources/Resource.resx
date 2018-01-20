@@ -69,4 +69,7 @@
 	<data name="Status" xml:space="preserve">
         <value>Rates loaded from Internet</value>
     </data>
+    <data name="ErrorLoad" xml:space="preserve">
+        <value>There are not internet connection and not load previously rates. Please try again with internet connection</value>
+    </data>
 </root>
