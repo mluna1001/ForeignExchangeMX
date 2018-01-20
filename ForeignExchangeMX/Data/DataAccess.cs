@@ -3,11 +3,11 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Models;
     using Interfaces;
+    using Models;
+    using SQLite.Net;
     using SQLiteNetExtensions.Extensions;
     using Xamarin.Forms;
-    using SQLite.Net;
 
     public class DataAccess : IDisposable
     {

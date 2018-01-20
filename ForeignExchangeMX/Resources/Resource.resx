@@ -19,7 +19,7 @@
         <value>You must enter a value in amount.</value>
     </data>
 	<data name="Error" xml:space="preserve">
-        <value>Error</value>
+        <value>Info</value>
     </data>
 	<data name="Accept" xml:space="preserve">
         <value>Accept</value>
@@ -71,5 +71,11 @@
     </data>
     <data name="ErrorLoad" xml:space="preserve">
         <value>There are not internet connection and not load previously rates. Please try again with internet connection</value>
+    </data>
+    <data name="APIDataResult" xml:space="preserve">
+        <value>Rates loaded from internet</value>
+    </data>
+    <data name="LocalDataResult" xml:space="preserve">
+        <value>Rates loaded from local data</value>
     </data>
 </root>

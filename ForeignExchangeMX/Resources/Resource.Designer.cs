@@ -166,5 +166,17 @@ namespace ForeignExchangeMX.Resources {
                 return ResourceManager.GetString("ErrorLoad", resourceCulture);
             }
         }
+        
+        public static string APIDataResult {
+            get {
+                return ResourceManager.GetString("APIDataResult", resourceCulture);
+            }
+        }
+        
+        public static string LocalDataResult {
+            get {
+                return ResourceManager.GetString("LocalDataResult", resourceCulture);
+            }
+        }
     }
 }

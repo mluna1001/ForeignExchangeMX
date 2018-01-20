@@ -1,8 +1,8 @@
 ﻿namespace ForeignExchangeMX.Helpers
 {
-    using Xamarin.Forms;
     using Interfaces;
     using Resources;
+    using Xamarin.Forms;
 
     public static class Lenguages
     {
@@ -111,6 +111,16 @@
         public static string ErrorLoad
         {
             get { return Resource.ErrorLoad; }
+        }
+
+        public static string APIDataResult
+        {
+            get { return Resource.APIDataResult; }
+        }
+
+        public static string LocalDataResult
+        {
+            get { return Resource.LocalDataResult; }
         }
     } 
 }

@@ -19,7 +19,7 @@
         <value>Debes ingresar un valor en cantidad.</value>
     </data>
     <data name="Error" xml:space="preserve">
-        <value>Error</value>
+        <value>Información</value>
     </data>
     <data name="Accept" xml:space="preserve">
         <value>Aceptar</value>
@@ -71,5 +71,11 @@
     </data>
     <data name="ErrorLoad" xml:space="preserve">
         <value>No hay conexiòn a internet y no se cargaron divisas. Intenta de nuevo con conexión a internet</value>
+    </data>
+    <data name="APIDataResult" xml:space="preserve">
+        <value>Tasas cargadas desde internet</value>
+    </data>
+    <data name="LocalDataResult" xml:space="preserve">
+        <value>Tasas cargadas de datos locales</value>
     </data>
 </root>

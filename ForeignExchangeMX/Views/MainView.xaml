@@ -91,7 +91,7 @@
                 HeightRequest="50"
                 IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
                 TextColor="White"
-                BackgroundColor="Navy"
+                BackgroundColor="#cc0000"
                 Text="{i18n:Translate Convert}">
             </Button>
             <Label

@@ -19,7 +19,7 @@
         <value>Vous devez saisir une valeur en montant.</value>
     </data>
     <data name="Error" xml:space="preserve">
-        <value>Erreur</value>
+        <value>informação</value>
     </data>
     <data name="Accept" xml:space="preserve">
         <value>Acceptez</value>
@@ -71,5 +71,11 @@
     </data>
     <data name="ErrorLoad" xml:space="preserve">
         <value>Não há conexão à Internet e não carrega taxas anteriores. Tente novamente com conexão à internet</value>
+    </data>
+    <data name="APIDataResult" xml:space="preserve">
+        <value>Tarifas carregadas da internet</value>
+    </data>
+    <data name="LocalDataResult" xml:space="preserve">
+        <value>Taxas carregadas a partir de dados locais</value>
     </data>
 </root>

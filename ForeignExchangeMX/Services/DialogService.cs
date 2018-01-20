@@ -1,6 +1,5 @@
 ﻿namespace ForeignExchangeMX.Services
 {
-    using System;
     using System.Threading.Tasks;
     using Helpers;
     using Xamarin.Forms;

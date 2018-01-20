@@ -19,7 +19,7 @@
         <value>Você deve inserir um valor em quantidade.</value>
     </data>
     <data name="Error" xml:space="preserve">
-        <value>Erro</value>
+        <value>Info</value>
     </data>
     <data name="Accept" xml:space="preserve">
         <value>Aceitar</value>
@@ -71,5 +71,11 @@
     </data>
     <data name="ErrorLoad" xml:space="preserve">
         <value>Il n'y a pas de connexion internet et ne charge pas les tarifs précédents. Veuillez réessayer avec la connexion Internet</value>
+    </data>
+    <data name="APIDataResult" xml:space="preserve">
+        <value>Tarifs chargés depuis internet</value>
+    </data>
+    <data name="LocalDataResult" xml:space="preserve">
+        <value>Tarifs chargés à partir des données locales</value>
     </data>
 </root>

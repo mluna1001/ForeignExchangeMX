@@ -9,7 +9,6 @@
     using ForeignExchangeMX.Models;
     using ForeignExchangeMX.Services;
     using GalaSoft.MvvmLight.Command;
-    using Xamarin.Forms;
 
     public class MainViewModel : INotifyPropertyChanged
     {
@@ -217,7 +216,7 @@
         void LoadLocalData()
         {
             rates = dataService.Get<Rate>(false);
-            Status = "Rates loaded from local data";
+            Status = Lenguages.LocalDataResult;
         }
 
         async Task LoadDataFromAPI()
@@ -241,7 +240,7 @@
             rates = (List<Rate>)response.Result;
             dataService.DeleteAll<Rate>();
             dataService.Save(rates);
-            Status = "Rates loaded from internet";
+            Status = Lenguages.APIDataResult;
         }
         #endregion
 

@@ -1,7 +1,7 @@
 ﻿namespace ForeignExchangeMX
 {
-    using Xamarin.Forms;
     using Views;
+    using Xamarin.Forms;
 
     public partial class App : Application
     {
